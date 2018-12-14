@@ -65,6 +65,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.useless_gap = 5
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -223,7 +224,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -398,6 +399,9 @@ globalkeys = gears.table.join(
 )
 
 clientkeys = gears.table.join(
+    -- to go to next screen
+    awful.key({ modkey,}, "e", function () awful.screen.focus_relative(1) end,
+        {description = "move another screen", group = "tag"}),
     awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
